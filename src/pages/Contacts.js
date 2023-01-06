@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
-import { Oval } from 'react-loader-spinner';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { Oval } from "react-loader-spinner";
 
-import ContactList from '../components/ContactList';
-import AddContact from '../components/AddContact';
-import Filter from '../components/Filter';
+import ContactList from "../components/ContactList";
+import AddContact from "../components/AddContact";
+import Filter from "../components/Filter";
 
-import { fetchContacts } from 'redux/contacts/operations';
-import { selectErrorValue, selectIsLoading } from 'redux/contacts/selectors';
+import { fetchContacts } from "redux/contacts/operations";
+import { selectErrorValue, selectIsLoading } from "redux/contacts/selectors";
 
-import css from '../components/App/App.module.css';
-import 'react-toastify/dist/ReactToastify.css';
+import css from "../components/App/App.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export function Contacts() {
   const error = useSelector(selectErrorValue);
@@ -24,7 +24,6 @@ export function Contacts() {
 
   return (
     <div className={css.container}>
-      <p className={css.sectionHeading}>Phonebook</p>
       <AddContact />
       <p className={css.sectionHeading}>Contacts</p>
       <Filter />
@@ -38,7 +37,7 @@ export function Contacts() {
           strokeWidthSecondary={1}
           color="blue"
           secondaryColor="white"
-          wrapperStyle={{ display: 'flex', justifyContent: 'center' }}
+          wrapperStyle={{ display: "flex", justifyContent: "center" }}
         />
       )}
       <ToastContainer />
