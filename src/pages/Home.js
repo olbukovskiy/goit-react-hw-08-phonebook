@@ -3,6 +3,7 @@ export const Home = () => {
     <div>
       Home page
       <div>Here will be some content</div>
+      <div>More content</div>
     </div>
   );
 };
