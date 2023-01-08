@@ -1,10 +1,11 @@
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "redux/user/operations";
 import { selectIsLoading } from "redux/user/selectors";
 
 import { Container } from "components/AppBar/AppBar.styled";
 import { AddBtn } from "components/AddContact/AddContact.styled";
+import { Input, Label } from "./RegisterForm.styled";
 
 const initialValues = {
   name: "",
@@ -23,35 +24,38 @@ export const RegisterForm = () => {
     <Container>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form>
-          <label>
+          <Label>
             Email
-            <Field
+            <Input
               type="email"
               name="email"
               required
               placeholder="Enter your email"
+              autoComplete="on"
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Login
-            <Field
+            <Input
               type="text"
               name="name"
               required
               placeholder="Enter your login"
+              autoComplete="on"
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Password
-            <Field
+            <Input
               type="password"
               name="password"
               required
               placeholder="Enter your password"
+              autoComplete="on"
             />
-          </label>
+          </Label>
           <AddBtn type="submit" disabled={isLoading}>
-            Register
+            Sign Up
           </AddBtn>
         </Form>
       </Formik>

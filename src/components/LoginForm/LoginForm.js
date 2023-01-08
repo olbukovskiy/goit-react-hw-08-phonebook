@@ -1,48 +1,54 @@
-import React from 'react';
-import { Field, Form, Formik } from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { logInUser } from 'redux/user/operations';
-import { selectIsLoading } from 'redux/user/selectors';
+import React from "react";
+import { Form, Formik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { logInUser } from "redux/user/operations";
+import { selectError, selectIsLoading } from "redux/user/selectors";
+import { Container } from "components/AppBar/AppBar.styled";
+import { AddBtn } from "components/AddContact/AddContact.styled";
+import { Input, Label } from "components/RegisterForm/RegisterForm.styled";
 
 const initialValues = {
-  password: '',
-  email: '',
+  password: "",
+  email: "",
 };
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const authentificationProblem = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
   const submitHandler = ({ email, password }, actions) => {
     dispatch(logInUser({ email, password }));
     actions.resetForm();
   };
   return (
-    <>
+    <Container>
       <Formik initialValues={initialValues} onSubmit={submitHandler}>
         <Form>
-          <label>
+          <Label>
             Email
-            <Field
+            <Input
               type="email"
               name="email"
               required
               placeholder="Enter your email"
+              autoComplete="on"
             />
-          </label>
-          <label>
+          </Label>
+          <Label>
             Password
-            <Field
+            <Input
               type="password"
               name="password"
               required
               placeholder="Enter your password"
+              autoComplete="on"
             />
-          </label>
-          <button type="submit" disabled={isLoading}>
+          </Label>
+          <AddBtn type="submit" disabled={isLoading}>
             Log In
-          </button>
+          </AddBtn>
         </Form>
       </Formik>
-    </>
+    </Container>
   );
 };
