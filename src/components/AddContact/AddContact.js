@@ -10,8 +10,10 @@ import { addContact } from "redux/contacts/operations";
 
 import { Button } from "./AddContact.styled";
 
-import { ModalWindow } from "components/Modal/Modal";
+import { ModalWindow, targetElement } from "components/Modal/Modal";
 import { FormInput, Label, FormField, AddBtn } from "./AddContact.styled";
+
+import { enableBodyScroll } from "body-scroll-lock";
 
 const initialValues = {
   name: "",
@@ -28,6 +30,7 @@ const AddContact = () => {
   };
 
   const closeModal = () => {
+    enableBodyScroll(targetElement);
     setIsOpen(false);
   };
 
