@@ -8,8 +8,10 @@ import { AiOutlineUserAdd } from "react-icons/ai";
 import { selectContacts } from "redux/contacts/selectors";
 import { addContact } from "redux/contacts/operations";
 
-import { AddContactModal } from "components/AddContactModal/AddContactModal";
-import { FormInput, Label, Button, FormField } from "./AddContact.styled";
+import { Button } from "./AddContact.styled";
+
+import { ModalWindow } from "components/Modal/Modal";
+import { FormInput, Label, FormField, AddBtn } from "./AddContact.styled";
 
 const initialValues = {
   name: "",
@@ -30,7 +32,7 @@ const AddContact = () => {
   };
 
   const handleSubmit = ({ name, number }, actions) => {
-    const check = contactsList.find((contact) => contact.name === name);
+    const check = contactsList.find((contact) => contact.name === name.trim());
 
     if (check) {
       toast.warn(`${name} is already in contacts.`, {
@@ -47,12 +49,12 @@ const AddContact = () => {
 
   return (
     <>
-      <button type="button" onClick={openModal}>
+      <AddBtn Button type="button" onClick={openModal}>
         <AiOutlineUserAdd />
         Add contact
-      </button>
+      </AddBtn>
       {isOpen && (
-        <AddContactModal onClose={closeModal}>
+        <ModalWindow onClose={closeModal}>
           <Formik initialValues={initialValues} onSubmit={handleSubmit}>
             <FormField>
               <Label>
@@ -80,7 +82,7 @@ const AddContact = () => {
               <Button type="submit">Add new contact</Button>
             </FormField>
           </Formik>
-        </AddContactModal>
+        </ModalWindow>
       )}
     </>
   );

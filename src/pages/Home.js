@@ -1,9 +1,9 @@
+import { Container } from "components/AppBar/AppBar.styled";
+
 export const Home = () => {
   return (
-    <div>
-      Home page
-      <div>Here will be some content</div>
-      <div>More</div>
-    </div>
+    <Container>
+      <div>Welcome!</div>
+    </Container>
   );
 };

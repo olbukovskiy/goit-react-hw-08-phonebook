@@ -1,6 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { logOutUser } from 'redux/user/operations';
-import { selectIsLoading, selectUser } from 'redux/user/selectors';
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser } from "redux/user/operations";
+import { selectIsLoading, selectUser } from "redux/user/selectors";
+import { ExtraText, SubmitBtn, Text, Wrapper } from "./UserMenu.styled";
 
 export function UserMenu() {
   const { name } = useSelector(selectUser);
@@ -10,11 +11,13 @@ export function UserMenu() {
     dispatch(logOutUser());
   };
   return (
-    <>
-      <p>{`Welcome, ${name}`}</p>
-      <button type="button" onClick={handleClick} disabled={isLoading}>
+    <Wrapper>
+      <Text>
+        Welcome, <ExtraText>{`${name}`}</ExtraText>
+      </Text>
+      <SubmitBtn type="button" onClick={handleClick} disabled={isLoading}>
         Log Out
-      </button>
-    </>
+      </SubmitBtn>
+    </Wrapper>
   );
 }

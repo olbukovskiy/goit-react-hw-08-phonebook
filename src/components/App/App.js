@@ -1,39 +1,41 @@
-import { lazy, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import { Oval } from 'react-loader-spinner';
+import { lazy, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import { Oval } from "react-loader-spinner";
 
-import { refreshCurrentUser } from 'redux/user/operations';
-import { selectIsRefreshing } from 'redux/user/selectors';
+import { refreshCurrentUser } from "redux/user/operations";
+import { selectIsRefreshing } from "redux/user/selectors";
 
-import { PublicRoute } from 'components/PublicRoute';
-import { PrivateRoute } from 'components/PrivateRoute';
+import { PublicRoute } from "components/PublicRoute";
+import { PrivateRoute } from "components/PrivateRoute";
 
-import { SharedLayout } from 'components/SharedLayout/SharedLayout';
+import { SharedLayout } from "components/SharedLayout/SharedLayout";
+
+import css from "../App/App.module.css";
 
 const Register = lazy(() =>
-  import('pages/Register').then(module => ({
+  import("pages/Register").then((module) => ({
     ...module,
     default: module.Register,
   }))
 );
 
 const Login = lazy(() =>
-  import('pages/Login').then(module => ({
+  import("pages/Login").then((module) => ({
     ...module,
     default: module.Login,
   }))
 );
 
 const Contacts = lazy(() =>
-  import('pages/Contacts').then(module => ({
+  import("pages/Contacts").then((module) => ({
     ...module,
     default: module.Contacts,
   }))
 );
 
 const Home = lazy(() =>
-  import('pages/Home').then(module => ({
+  import("pages/Home").then((module) => ({
     ...module,
     default: module.Home,
   }))
@@ -48,7 +50,7 @@ export function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div className={css.section}>
       {isRefreshing ? (
         <Oval
           ariaLabel="loading-indicator"
@@ -58,7 +60,7 @@ export function App() {
           strokeWidthSecondary={1}
           color="blue"
           secondaryColor="white"
-          wrapperStyle={{ display: 'flex', justifyContent: 'center' }}
+          wrapperStyle={{ display: "flex", justifyContent: "center" }}
         />
       ) : (
         <Routes>
@@ -85,6 +87,6 @@ export function App() {
           </Route>
         </Routes>
       )}
-    </>
+    </div>
   );
 }

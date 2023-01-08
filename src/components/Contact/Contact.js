@@ -1,18 +1,21 @@
 import React, { useReducer, useState } from "react";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
+import { Formik } from "formik";
 
 import { changeContactData, deleteContact } from "redux/contacts/operations";
+import { ModalWindow } from "components/Modal/Modal";
 
-import { ListItem, Number, TextField } from "./Contact.styled";
 import {
-  FormInput,
-  Label,
+  BtnsWrapper,
+  ListItem,
+  Name,
+  Number,
+  TextField,
   Button,
-  FormField,
-} from "../AddContact/AddContact.styled";
-import { Formik } from "formik";
-import { AddContactModal } from "components/AddContactModal/AddContactModal";
+  OptionButton,
+} from "./Contact.styled";
+import { FormInput, Label, FormField } from "../AddContact/AddContact.styled";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -60,16 +63,18 @@ export default function Contact({ id, name, number }) {
   return (
     <ListItem id={id}>
       <TextField>
-        {name}: <Number> {number}</Number>
+        <Name> {name} </Name> <Number> {number}</Number>
       </TextField>
-      <Button type="button" onClick={openModal}>
-        Edit
-      </Button>
-      <Button type="button" onClick={handleDelete} disabled={isLoading}>
-        {isLoading ? "Deleting..." : "Delete"}
-      </Button>
+      <BtnsWrapper>
+        <OptionButton variant="contained" type="button" onClick={openModal}>
+          Edit
+        </OptionButton>
+        <OptionButton type="button" onClick={handleDelete} disabled={isLoading}>
+          {isLoading ? "Deleting..." : "Delete"}
+        </OptionButton>
+      </BtnsWrapper>
       {isOpen && (
-        <AddContactModal onClose={closeModal}>
+        <ModalWindow onClose={closeModal}>
           <Formik initialValues={state} onSubmit={handleSubmit}>
             <FormField>
               <Label>
@@ -101,7 +106,7 @@ export default function Contact({ id, name, number }) {
               <Button type="submit">Save changes</Button>
             </FormField>
           </Formik>
-        </AddContactModal>
+        </ModalWindow>
       )}
     </ListItem>
   );

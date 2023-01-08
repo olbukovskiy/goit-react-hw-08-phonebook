@@ -1,41 +1,25 @@
-export const theme = {
-  space: [0, 4, 8, 16, 24, 32, 64, 128, 256, 512],
-  fonts: {
-    body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading: "inherit",
-    monospace: "Menlo, monospace",
-  },
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
-  fontWeights: {
-    body: 400,
-    heading: 700,
-    bold: 700,
-  },
-  lineHeights: {
-    body: 1.5,
-    heading: 1.125,
-  },
+export const theme = Object.freeze({
   colors: {
-    text: "#000",
-    background: "#fff",
-    primary: "#07c",
-    secondary: "#30c",
-    accent: "#609",
-    great: "#eee",
-    muted: "#f6f6f6",
-    bckg: "#757575",
-    bg: "#f5f4fa",
-    green: "green",
-    red: "red",
-    tableBg: "#1b1e24",
+    accent: "#2196F3",
+    white: "#ffffff",
+    gray: "#9e9e9e",
+    light: "#f2f2f2",
+    dark: "#212121",
+    mainBackground: ["#fff"],
+    tagBackground: ["linear-gradient(to bottom, #FFD194, #D1913C)"],
   },
-  borders: {
-    none: "none",
-    normal: "1px solid",
+  fontSizes: {
+    small: "14px",
+    medium: "18px",
+    large: "22px",
   },
-  radii: {
-    none: "0",
-    normal: "4px",
-    round: "50%",
+  spacing: (value) => `${4 * value}px`,
+  shadows: {
+    small: "0 5px 7px -1px rgba(51, 51, 51, 0.23)",
+    regular: "0px 4px 10px 4px #9e9e9e",
+    medium: "0 9px 47px 11px rgba(51, 51, 51, 0.18);",
   },
-};
+  animation: {
+    cubicBezier: "0.25s cubic-bezier(0.7, 0.98, 0.86, 0.98)",
+  },
+});

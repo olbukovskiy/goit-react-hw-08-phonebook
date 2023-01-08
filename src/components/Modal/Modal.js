@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
-import { Backdrop } from "./AddContactModal.styled";
+import IconBtn from "components/IconBtn/IconBtn";
+import { BackdropOver, ModalPaper } from "./Modal.styled";
 
 const modalRoot = document.querySelector("#modal-root");
 
-export const AddContactModal = ({ children, onClose }) => {
+export const ModalWindow = ({ children, onClose }) => {
   const onBackdropClickHandler = (event) => {
     if (event.target === event.currentTarget) {
       onClose();
@@ -25,12 +27,19 @@ export const AddContactModal = ({ children, onClose }) => {
   }, [onClose]);
 
   return createPortal(
-    <Backdrop onClick={onBackdropClickHandler}>{children}</Backdrop>,
+    <BackdropOver open={true} onClick={onBackdropClickHandler}>
+      <ModalPaper>
+        <IconBtn onClick={onClose}>
+          <AiOutlineCloseCircle size="30px" />
+        </IconBtn>
+        {children}
+      </ModalPaper>
+    </BackdropOver>,
     modalRoot
   );
 };
 
-AddContactModal.propTypes = {
+ModalWindow.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func,
 };
