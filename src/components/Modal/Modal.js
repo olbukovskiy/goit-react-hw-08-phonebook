@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import { AiOutlineCloseCircle } from "react-icons/ai";
-
 import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 import IconBtn from "components/IconBtn/IconBtn";
 import { BackdropOver, ModalPaper } from "./Modal.styled";

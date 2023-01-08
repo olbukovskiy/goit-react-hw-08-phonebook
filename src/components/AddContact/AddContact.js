@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
+import { enableBodyScroll } from "body-scroll-lock";
 import { toast } from "react-toastify";
 import { AiOutlineUserAdd } from "react-icons/ai";
 
@@ -12,8 +13,6 @@ import { Button } from "./AddContact.styled";
 
 import { ModalWindow, targetElement } from "components/Modal/Modal";
 import { FormInput, Label, FormField, AddBtn } from "./AddContact.styled";
-
-import { enableBodyScroll } from "body-scroll-lock";
 
 const initialValues = {
   name: "",
