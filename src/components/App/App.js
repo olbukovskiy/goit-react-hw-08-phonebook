@@ -2,6 +2,7 @@ import { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
+import { ToastContainer } from "react-toastify";
 
 import { refreshCurrentUser } from "redux/user/operations";
 import { selectIsRefreshing } from "redux/user/selectors";
@@ -12,6 +13,7 @@ import { PrivateRoute } from "components/PrivateRoute";
 import { SharedLayout } from "components/SharedLayout/SharedLayout";
 
 import css from "../App/App.module.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = lazy(() =>
   import("pages/Register").then((module) => ({
@@ -35,7 +37,7 @@ const Contacts = lazy(() =>
 );
 
 const Home = lazy(() =>
-  import("pages/Home").then((module) => ({
+  import("../../pages/Home/Home").then((module) => ({
     ...module,
     default: module.Home,
   }))
@@ -87,6 +89,7 @@ export function App() {
           </Route>
         </Routes>
       )}
+      <ToastContainer />
     </div>
   );
 }
