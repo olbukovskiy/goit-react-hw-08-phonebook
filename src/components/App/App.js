@@ -1,6 +1,6 @@
 import { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Oval } from "react-loader-spinner";
 import { ToastContainer } from "react-toastify";
 
@@ -87,6 +87,7 @@ export function App() {
               }
             />
           </Route>
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       )}
       <ToastContainer />

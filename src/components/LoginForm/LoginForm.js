@@ -2,7 +2,11 @@ import React from "react";
 import { Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from "redux/user/operations";
-import { selectIsLoading } from "redux/user/selectors";
+import {
+  selectError,
+  selectIsLoading,
+  selectIsLoggedIn,
+} from "redux/user/selectors";
 import { Container } from "components/AppBar/AppBar.styled";
 import { AddBtn } from "components/AddContact/AddContact.styled";
 import { Input, Label } from "components/RegisterForm/RegisterForm.styled";
@@ -14,10 +18,15 @@ const initialValues = {
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isAuthentificationError = useSelector(selectError);
+
   const isLoading = useSelector(selectIsLoading);
   const submitHandler = ({ email, password }, actions) => {
     dispatch(logInUser({ email, password }));
-    actions.resetForm();
+    if (isLoggedIn && isAuthentificationError === null) {
+      actions.resetForm();
+    }
   };
   return (
     <Container>
