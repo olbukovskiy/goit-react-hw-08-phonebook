@@ -14,8 +14,9 @@ import {
   Container,
   Header,
 } from "./AppBar.styled";
+import React from "react";
 
-export function AppBar() {
+export function AppBarComponent() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <Header>
@@ -32,3 +33,5 @@ export function AppBar() {
     </Header>
   );
 }
+
+export const AppBar = React.memo(AppBarComponent);
