@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import PropTypes from "prop-types";
-import { clearAllBodyScrollLocks, disableBodyScroll } from "body-scroll-lock";
+import {
+  clearAllBodyScrollLocks,
+  disableBodyScroll,
+  enableBodyScroll,
+} from "body-scroll-lock";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 import IconBtn from "components/IconBtn/IconBtn";
@@ -9,44 +13,41 @@ import { BackdropOver, ModalPaper } from "./Modal.styled";
 
 const modalRoot = document.querySelector("#modal-root");
 
-export let targetElement = null;
-
 export const ModalWindow = ({ children, onClose }) => {
-  const [isMounted, setIsMounted] = useState(false);
+  const modalRef = useRef();
+
+  const closeModal = useCallback(() => {
+    enableBodyScroll(modalRef.current);
+    onClose();
+  }, [onClose]);
 
   const onBackdropClickHandler = (event) => {
     if (event.target === event.currentTarget) {
-      onClose();
+      closeModal();
     }
   };
 
   useEffect(() => {
     const onEscHandler = (event) => {
       if (event.code === "Escape") {
-        onClose();
+        closeModal();
       }
     };
 
     window.addEventListener("keydown", onEscHandler);
     return () => window.removeEventListener("keydown", onEscHandler);
-  }, [onClose]);
+  }, [closeModal]);
 
   useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      targetElement = document.querySelector("#backdrop");
-      return;
-    }
-
-    disableBodyScroll(targetElement);
+    disableBodyScroll(modalRef.current);
 
     return () => clearAllBodyScrollLocks();
-  }, [isMounted]);
+  }, []);
 
   return createPortal(
-    <BackdropOver open={true} onClick={onBackdropClickHandler} id="backdrop">
+    <BackdropOver open={true} onClick={onBackdropClickHandler} ref={modalRef}>
       <ModalPaper>
-        <IconBtn onClick={onClose}>
+        <IconBtn onClick={closeModal}>
           <AiOutlineCloseCircle size="30px" />
         </IconBtn>
         {children}
